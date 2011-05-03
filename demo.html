@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Scrolling Banner</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+    <script type="text/javascript" src="./banner.js"></script>
+    <style type="text/css">
+
+      body
+      { font-family: Helvetica, Arial, sans-serif; }
+
+      h1{ font-weight: 100; font-size: 25px; }
+
+      #scrollbox
+      {
+        margin-left: 20px;
+        width: 800px;
+        height: 150px;
+        background: #EEE;
+        overflow: hidden;
+        border: 1px solid #888;
+        box-shadow: 0px 3px 6px #999;
+        margin-bottom: 10px;
+      }
+
+      #scrollbox_controls
+      {
+        clear: both;
+        margin-left: 20px;
+      }
+
+      #scrollbox_controls input[type="submit"]
+      {
+        padding: 5px 20px 5px 20px;
+        background: #EEE;
+        border-radius: 4px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>Scrolling Banner</h1>
+
+    <div id="scrollbox">
+      <div>
+        <div id="scrollbox-1">
+          <img src="./images/banner1.png" alt="banner1"/>
+        </div>
+
+        <div id="scrollbox-2">
+          <img src="./images/banner2.png" alt="banner2"/>
+        </div>
+        
+        <div id="scrollbox-3">
+          <img src="./images/banner3.png" alt="banner3"/>
+        </div>
+
+        <div id="scrollbox-4">
+          <img src="./images/banner4.png" alt="banner4"/>
+        </div>
+      </div>
+    </div>
+    <div id="scrollbox_controls">
+      <input type="submit" value="Prev" onClick="scrollBox.prev();"/>
+      <input type="submit" value="Next" onClick="scrollBox.next();"/>
+    </div>
+  </body>
+</html>
