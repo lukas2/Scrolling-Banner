@@ -20,26 +20,31 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  */ 
 
 $(function() {
-  scrollBox = new ScrollBanner($("#scrollbox"), null);
+  scrollBox = new ScrollBanner($("#scrollbox"), $("#scrollbox_position"), null);
 });
 
-ScrollBanner = function(container, type){
+ScrollBanner = function(container, position, type){
     // type for now is being ignored
     // set speed in milliseconds, less is faster.
     this.animation_speed = 400;
 
     this.container = container;
+    this.position = position;
+    this.selected = 0;
+    this.numBanners = 0;
     this.marginleft = 0;
     this.banners = null;
     this.wrapper = container.children(":first-child");
     this.bannerWidth = 0;
     this.initBanners(container);
+    this.initPosition(position);
     this.locked = false;
 }
 
 ScrollBanner.prototype.initBanners = function(container)
 {
   this.banners = $("#" + container.attr("id") + " > div > div[id^=" + container.attr("id") + "]");
+  this.numBanners = this.banners.length;
 
   // make all banners the same width and apply float
   this.banners.each(function(e){
@@ -50,6 +55,17 @@ ScrollBanner.prototype.initBanners = function(container)
 
   this.bannerWidth = this.banners.first().width();
   this.wrapper.css("width", this.bannerWidth * this.banners.size() + "px");
+}
+
+ScrollBanner.prototype.initPosition = function(position)
+{
+  position.empty();
+  for(var i = 0; i < this.banners.length; i++)
+  {
+    var class = "inactive_bullet";
+    if(i == this.selected) { class = "active_bullet" };
+    var bullet = position.append("<li class='" + class + "'>&bull;</li>");
+  }
 }
 
 ScrollBanner.prototype.reAttachRight = function()
@@ -76,6 +92,8 @@ ScrollBanner.prototype.next = function()
   var that = this;
   newMargin = - this.bannerWidth;
   this.wrapper.animate({ marginLeft: newMargin + "px"}, this.animation_speed, function() { that.reAttachRight() });
+
+  this.nextBullet();
 }
 
 ScrollBanner.prototype.prev = function()
@@ -85,9 +103,20 @@ ScrollBanner.prototype.prev = function()
   var that = this;
   this.preAttachLeft();
   this.wrapper.animate({ marginLeft: "0px"}, this.animation_speed, function() { that.unLock(); }) ;
+
+  this.previousBullet();
 }
 
 ScrollBanner.prototype.lock = function() { this.locked = true; }
 ScrollBanner.prototype.unLock = function() { this.locked = false; }
 
-
+ScrollBanner.prototype.nextBullet = function() { 
+  this.selected++;
+  if(this.selected >= this.numBanners) { this.selected = 0; }
+  this.initPosition(this.position);
+}
+ScrollBanner.prototype.previousBullet = function() { 
+  this.selected--;
+  if(this.selected < 0) { this.selected = this.numBanners - 1; }
+  this.initPosition(this.position);
+}

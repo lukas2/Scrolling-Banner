@@ -27,6 +27,7 @@
       {
         clear: both;
         margin-left: 20px;
+        width: 800px;
       }
 
       #scrollbox_controls input[type="submit"]
@@ -35,6 +36,25 @@
         background: #EEE;
         border-radius: 4px;
       }
+
+      #scrollbox_position 
+      {
+        float: right;
+        padding: 0;
+        margin: 0;
+      }
+
+      #scrollbox_position li
+      {
+        display: inline-block;
+        font-size: 40px;
+        line-height: 15px;
+        padding: 0;
+        margin: 0;
+      }
+
+      .active_bullet { color: #777; }
+      .inactive_bullet { color: #000; }
 
     </style>
   </head>
@@ -58,11 +78,17 @@
         <div id="scrollbox-4">
           <img src="./images/banner4.png" alt="banner4"/>
         </div>
+
+        <div id="scrollbox-5">
+          <img src="./images/banner5.png" alt="banner5"/>
+        </div>
       </div>
     </div>
     <div id="scrollbox_controls">
       <input type="submit" value="Prev" onClick="scrollBox.prev();"/>
       <input type="submit" value="Next" onClick="scrollBox.next();"/>
+      <ul id="scrollbox_position">
+      </ul>
     </div>
   </body>
 </html>
