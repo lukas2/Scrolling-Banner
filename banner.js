@@ -1,44 +1,44 @@
 /**
-Copyright (C) 2011 by Lukas Zielinski
+  Copyright (C) 2011 by Lukas Zielinski
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+  Permission is hereby granted, free of charge, to any person obtaining a copy
+  of this software and associated documentation files (the "Software"), to deal
+  in the Software without restriction, including without limitation the rights
+  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  copies of the Software, and to permit persons to whom the Software is
+  furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+  The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
- */ 
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+  */ 
 
 $(function() {
   scrollBox = new ScrollBanner($("#scrollbox"), $("#scrollbox_position"), null);
 });
 
 ScrollBanner = function(container, position, type){
-    // type for now is being ignored
-    // set speed in milliseconds, less is faster.
-    this.animation_speed = 400;
+  // type for now is being ignored
+  // set speed in milliseconds, less is faster.
+  this.animation_speed = 400;
 
-    this.container = container;
-    this.position = position;
-    this.selected = 0;
-    this.numBanners = 0;
-    this.marginleft = 0;
-    this.banners = null;
-    this.wrapper = container.children(":first-child");
-    this.bannerWidth = 0;
-    this.initBanners(container);
-    this.initPosition(position);
-    this.locked = false;
+  this.container = container;
+  this.position = position;
+  this.selected = 0;
+  this.numBanners = 0;
+  this.marginleft = 0;
+  this.banners = null;
+  this.wrapper = container.children(":first-child");
+  this.bannerWidth = 0;
+  this.initBanners(container);
+  this.initPosition(position);
+  this.locked = false;
 }
 
 ScrollBanner.prototype.initBanners = function(container)
@@ -99,7 +99,7 @@ ScrollBanner.prototype.next = function()
 ScrollBanner.prototype.prev = function()
 {
   if(this.locked) return; this.lock();
-  
+
   var that = this;
   this.preAttachLeft();
   this.wrapper.animate({ marginLeft: "0px"}, this.animation_speed, function() { that.unLock(); }) ;
